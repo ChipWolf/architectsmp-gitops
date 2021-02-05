@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: minecraft-survival
+  name: minecraft-creative
   namespace: default
 spec:
   interval: 5m
@@ -31,35 +31,28 @@ spec:
       limits:
         memory: 10240Mi
     extraEnv:
-      USE_AIKAR_FLAGS: TRUE
+      USE_AIKAR_FLAGS: "TRUE"
     minecraftServer:
       eula: "TRUE"
       onlineMode: false
       version: "1.16.5"
-      mode: survival
-      forcegameMode: false
+      gameMode: creative
+      forcegameMode: true
       type: PAPER
-      pvp: true
+      pvp: false
+      allowNether: false
       forceReDownload: true
-      difficulty: hard
+      difficulty: easy
+      levelType: FLAT
+      worldSaveName: creative
       playerIdleTimeout: 300
-      levelSeed: "-2143500864"
+      generateStructures: false
       maxPlayers: 40
-      viewDistance: 12
+      viewDistance: 16
       maxTickTime: -1
       memory: 8G
-      motd: '"\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7b\\u00A7lArchitect SMP\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7a\\u00A7lSurvival \\u00A7r] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r\\n\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7eNews:\\u00A7r ] --\\u00A7r [ \\u00A7ddonate.architectsmp.com\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r"'
+      motd: '"\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7b\\u00A7lArchitect SMP\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7a\\u00A7lCreative \\u00A7r] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r\\n\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7eNews:\\u00A7r ] --\\u00A7r [ \\u00A7ddonate.architectsmp.com\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r"'
       serviceType: ClusterIP
       rcon:
         enabled: true
         serviceType: ClusterIP
-      dynmap:
-        service:
-          enabled: true
-        ingress:
-          enabled: true
-          annotations:
-            kubernetes.io/ingress.class: nginx
-          hosts:
-            - name: map.architectsmp.com
-              path: /
