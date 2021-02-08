@@ -31,7 +31,8 @@ spec:
       limits:
         memory: 10240Mi
     extraEnv:
-      USE_AIKAR_FLAGS: TRUE
+      USE_AIKAR_FLAGS: "TRUE"
+      OVERRIDE_SERVER_PROPERTIES: "TRUE"
     minecraftServer:
       eula: "TRUE"
       onlineMode: false

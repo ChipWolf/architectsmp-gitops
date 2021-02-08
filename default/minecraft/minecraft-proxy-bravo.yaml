@@ -24,7 +24,7 @@ spec:
     bungeeCord:
       type: BUNGEECORD
       serviceType: LoadBalancer
-      loadBalancerIP: 138.201.203.179
+      loadBalancerIP: 138.201.203.147
       memory: 2G
       rcon:
         enabled: true
