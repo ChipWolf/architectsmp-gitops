@@ -47,6 +47,7 @@ spec:
       levelType: FLAT
       worldSaveName: creative
       playerIdleTimeout: 300
+      maxWorldSize: 29999984
       generateStructures: false
       maxPlayers: 40
       viewDistance: 16
