@@ -6,6 +6,12 @@ metadata:
   namespace: default
 spec:
   interval: 5m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
   chart:
     spec:
       # renovate: registryUrl=https://itzg.github.io/minecraft-server-charts/
@@ -47,7 +53,7 @@ spec:
       levelType: FLAT
       worldSaveName: creative
       playerIdleTimeout: 300
-      maxWorldSize: 29999984
+      maxWorldSize: 100000
       generateStructures: false
       maxPlayers: 40
       viewDistance: 16
