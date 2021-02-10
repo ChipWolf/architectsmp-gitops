@@ -193,6 +193,8 @@ spec:
           - hosts:
               - prom-server.architectsmp.com
       prometheusSpec:
+        externalLabels:
+          cluster: "default"
         replicas: 2
         replicaExternalLabelName: "replica"
         ruleSelector: {}
