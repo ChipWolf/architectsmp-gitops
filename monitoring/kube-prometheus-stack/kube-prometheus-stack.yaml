@@ -195,7 +195,7 @@ spec:
       prometheusSpec:
         externalLabels:
           cluster: "default"
-        replicas: 2
+        replicas: 1
         replicaExternalLabelName: "replica"
         ruleSelector: {}
         ruleNamespaceSelector: {}
