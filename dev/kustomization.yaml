@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dev
+resources:
+  - github.com/architectsmp/k8s-gitops/default/minecraft?ref=dev
+  - namespace.yaml
+patchesStrategicMerge:
+  - minecraft-creative.yaml
+  - minecraft-proxy-bravo.yaml
+  - minecraft-survival.yaml
