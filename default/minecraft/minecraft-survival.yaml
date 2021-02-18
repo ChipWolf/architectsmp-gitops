@@ -35,6 +35,8 @@ spec:
         memory: 8192Mi
       limits:
         memory: 10240Mi
+    podAnnotations:
+      backup.velero.io/backup-volumes: datadir
     extraEnv:
       USE_AIKAR_FLAGS: "TRUE"
       OVERRIDE_SERVER_PROPERTIES: "TRUE"
