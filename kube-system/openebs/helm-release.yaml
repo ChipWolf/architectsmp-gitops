@@ -17,6 +17,8 @@ spec:
       interval: 5m
   values:
     # required only for cStor & Jiva
+    apiserver:
+      enabled: false
     provisioner:
       enabled: false
     ndm:
