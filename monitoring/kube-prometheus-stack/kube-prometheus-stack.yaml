@@ -62,7 +62,11 @@ spec:
             - match:
                 alertname: Watchdog
               receiver: "null"
-            - receiver: "slack-notifications"
+            - receiver: "pagerduty"
+              match:
+                severity: warning
+              continue: true
+            - receiver: "pagerduty"
               match:
                 severity: critical
               continue: true
@@ -75,6 +79,9 @@ spec:
             # Apply inhibition if the alertname is the same.
             equal: ["alertname", "namespace"]
         templates: ["*.tmpl"]
+      templateFiles:
+        pagerduty-custom.tmpl: |-
+          {{- define "pagerduty.custom.description" -}}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }} {{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }} {{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }} {{ else }}{{ .CommonLabels.alertname }}{{ end }}{{- end -}}
     nodeExporter:
       serviceMonitor:
         relabelings:
