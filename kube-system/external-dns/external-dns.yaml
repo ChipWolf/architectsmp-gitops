@@ -27,5 +27,6 @@ spec:
     cloudflare:
       email: mc.architect.smp@gmail.com
       secretName: cloudflare
+      proxied: false
     domainFilters: ["architectsmp.com"]
     policy: sync
