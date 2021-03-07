@@ -69,6 +69,8 @@ spec:
           enabled: true
           annotations:
             kubernetes.io/ingress.class: nginx
+            external-dns.alpha.kubernetes.io/hostname: map.architectsmp.com
+            external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
           hosts:
             - name: map.architectsmp.com
               path: /
