@@ -19,10 +19,16 @@ Metrics and observability collection and dashboard software - also installs graf
 
 * [thanos/thanos.yaml](thanos/thanos.yaml)
 
-# minio
+## minio
 
 ![](https://i.imgur.com/RF0aYAg.png)
 
 S3-compatible bucket storage service
 
 * [minio.yaml](minio/minio.yaml)
+
+## uptimerobot-prometheus
+
+Based on this [custom helm chart](https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus)
+
+* [uptimerobot-prometheus/uptimerobot-prometheus.yaml](uptimerobot-prometheus/-prometheusuptimerobot.yaml)
