@@ -16,7 +16,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 13.13.1
+      version: 14.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community-charts
@@ -107,7 +107,7 @@ spec:
       templateFiles:
         pagerduty-custom.tmpl: |-
           {{- define "pagerduty.custom.description" -}}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }}{{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}{{- end -}}
-          {{- define "pagerduty.custom.instances" -}}{{ if eq .CommonAnnotations.description ""}}{{- range $i, $alert := . }}{{- "\n" -}}{{- .Annotations.description -}}{{- end -}}{{- end -}}{{- end -}}
+          {{- define "pagerduty.custom.instances" -}}{{- range $i, $alert := . }}{{- .Annotations.description -}}{{- "\n" -}}{{- end -}}{{- end -}}
     nodeExporter:
       serviceMonitor:
         relabelings:
