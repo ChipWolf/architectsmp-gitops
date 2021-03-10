@@ -4,6 +4,8 @@
   schedule: "after 5pm and before 10pm",
   dependencyDashboard: true,
   dependencyDashboardAutoclose: true,
+  prCreation: "not-pending",
+  stabilityDays: 1,
   commitMessageSuffix: "[ci-skip]",
   commitBody: "Signed-off-by: Architect SMP <bloodycoffin@users.noreply.github.com>",
   // Do not notify on closed unmerged PRs
