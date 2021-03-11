@@ -1,34 +1,39 @@
 # monitoring
 
-## prometheus-operator
+## grafana
 
-![](https://i.imgur.com/xFOepF3.png)
+![grafana](https://i.imgur.com/hTo49Uo.png)
 
-![](https://i.imgur.com/hTo49Uo.png)
+Dashboarding for Prometheus
 
-Metrics and observability collection and dashboard software - also installs grafana
+* [grafana/grafana.yaml](grafana/grafana.yaml)
 
-* [prometheus-operator/prometheus-operator.yaml](prometheus-operator/prometheus-operator.yaml)
-* [prometheus-operator/prometheus-operator-helm-values.yaml](prometheus-operator/prometheus-operator-helm-values.yaml)
+## kube-prometheus-stack
+
+![kube-prometheus-stack](https://i.imgur.com/xFOepF3.png)
+
+Metrics collection and alerting
+
+* [kube-prometheus-stack/kube-prometheus-stack.yaml](prometheus-operator/prometheus-operator.yaml)
+
+## minio
+
+![minio](https://i.imgur.com/RF0aYAg.png)
+
+S3-compatible bucket storage service
+
+* [minio/minio.yaml](minio/minio.yaml)
 
 ## thanos
 
-![](https://i.imgur.com/IeWqEIB.png)
+![thanos](https://i.imgur.com/IeWqEIB.png)
 
 [Thanos](https://github.com/thanos-io/thanos) is a highly available Prometheus setup with long term storage capabilities.
 
 * [thanos/thanos.yaml](thanos/thanos.yaml)
 
-## minio
-
-![](https://i.imgur.com/RF0aYAg.png)
-
-S3-compatible bucket storage service
-
-* [minio.yaml](minio/minio.yaml)
-
 ## uptimerobot-prometheus
 
 Based on this [custom helm chart](https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus)
 
-* [uptimerobot-prometheus/uptimerobot-prometheus.yaml](uptimerobot-prometheus/-prometheusuptimerobot.yaml)
+* [uptimerobot/uptimerobot.yaml](uptimerobot/uptimerobot.yaml)
