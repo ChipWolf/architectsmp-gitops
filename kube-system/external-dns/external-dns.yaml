@@ -25,8 +25,8 @@ spec:
   values:
     provider: cloudflare
     cloudflare:
-      email: mc.architect.smp@gmail.com
+      email: hello@chipwolf.uk
       secretName: cloudflare-api-key
       proxied: false
-    domainFilters: ["architectsmp.com"]
+    domainFilters: ["hrzn.studio"]
     policy: sync

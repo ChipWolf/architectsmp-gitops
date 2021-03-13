@@ -34,8 +34,8 @@ installFlux() {
     exit 1
   fi
   flux bootstrap github \
-    --owner=architectsmp \
-    --repository=k8s-gitops \
+    --owner=chipwolf \
+    --repository=architectsmp-gitops \
     --branch main \
     --personal
 

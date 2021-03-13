@@ -1,24 +1,10 @@
 # kube-system
 
-## cifs-pv
-
-Using the [CIFS volume driver](https://k8scifsvol.juliohm.com.br/)
-
-cifs-based persistent mounts for pod volumes
-
-* [cifs-pv/](cifs-pv/)
-
 ## external-dns
 
 Configures an [external DNS](https://github.com/kubernetes-sigs/external-dns) provider (Cloudflare) for Kubernetes Ingresses and Services
 
 * [external-dns/](external-dns/)
-
-## metallb
-
-[Run your own on-prem LoadBalancer](https://metallb.universe.tf/)
-
-* [metallb/metallb.yaml](metallb/metallb.yaml)
 
 ## nginx
 

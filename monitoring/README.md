@@ -31,9 +31,3 @@ S3-compatible bucket storage service
 [Thanos](https://github.com/thanos-io/thanos) is a highly available Prometheus setup with long term storage capabilities.
 
 * [thanos/thanos.yaml](thanos/thanos.yaml)
-
-## uptimerobot-prometheus
-
-Based on this [custom helm chart](https://github.com/k8s-at-home/charts/tree/master/charts/uptimerobot-prometheus)
-
-* [uptimerobot/uptimerobot.yaml](uptimerobot/uptimerobot.yaml)

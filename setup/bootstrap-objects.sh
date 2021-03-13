@@ -30,6 +30,14 @@ installManualObjects(){
   # secrets
   ##########
   kubectl -n kube-system create secret generic kms-vault --from-literal=account.json="$(echo "$VAULT_KMS_ACCOUNT_JSON" | base64 --decode)"
+
+  ##########
+  # crds
+  ##########
+  kustomize build ../cert-manager/crds > /tmp/build.yaml
+  kustomize build ../monitoring/kube-prometheus-stack/crds >> /tmp/build.yaml
+  cat ../kube-system/vault-secrets-operator/crd.yaml >> /tmp/build.yaml
+  kubectl apply -f /tmp/build.yaml && rm -f /tmp/build.yaml
 }
 
 installManualObjects

@@ -26,22 +26,22 @@ spec:
     image:
       repository: "quay.io/oauth2-proxy/oauth2-proxy"
       tag: "v7.0.1"
-    replicaCount: 1
+    replicaCount: 2
     ingress:
       enabled: true
       path: /oauth2
-      hosts: [auth.architectsmp.com]
+      hosts: [auth.hrzn.studio]
       tls:
         - hosts:
-            - auth.architectsmp.com
+            - auth.hrzn.studio
     extraArgs:
       provider: oidc
-      oidc-issuer-url: https://architectsmp.eu.auth0.com/
+      oidc-issuer-url: https://cwlf.eu.auth0.com/
       skip-provider-button:
       pass-authorization-header:
       email-domain: "*"
-      cookie-domain: .architectsmp.com
-      whitelist-domain: .architectsmp.com
+      cookie-domain: .hrzn.studio
+      whitelist-domain: .hrzn.studio
   valuesFrom:
     - kind: Secret
       name: "oauth2-proxy-helm-values"

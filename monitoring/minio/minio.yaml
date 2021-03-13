@@ -33,16 +33,15 @@ spec:
       repository: drnic/kubectl
       tag: 1.16
     persistence:
-      existingClaim: cifs-data-pvc
-      subPath: minio
+      storageClass: longhorn
     ingress:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: nginx
-      hosts: [minio.architectsmp.com]
+      hosts: [minio.hrzn.studio]
       tls:
         - hosts:
-            - minio.architectsmp.com
+            - minio.hrzn.studio
     resources:
       requests:
         memory: 350Mi
@@ -57,7 +56,7 @@ spec:
     nasgateway:
       enabled: true
       # Number of parallel instances
-      replicas: 1
+      replicas: 3
   valuesFrom:
     - kind: Secret
       name: "minio-helm-values"
