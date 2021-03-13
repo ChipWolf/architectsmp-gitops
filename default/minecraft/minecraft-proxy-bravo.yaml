@@ -24,13 +24,12 @@ spec:
     image: itzg/bungeecord
     imageTag: 1.5.0-adopt13
     persistence:
-      storageClass: local-path
+      storageClass: longhorn
       dataDir:
         enabled: true
     bungeeCord:
       type: WATERFALL
       serviceType: LoadBalancer
-      loadBalancerIP: 138.201.203.183
       externalTrafficPolicy: Local
       memory: 2G
       rcon:

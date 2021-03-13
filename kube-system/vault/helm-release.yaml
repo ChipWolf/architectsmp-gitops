@@ -19,7 +19,7 @@ spec:
     server:
       dataStorage:
         enabled: true
-        storageClass: openebs-hostpath
+        storageClass: longhorn
       extraEnvironmentVars:
         GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-vault/account.json
       extraVolumes:
@@ -38,7 +38,7 @@ spec:
         enabled: "false"
       ha:
         enabled: "true"
-        replicas: 1
+        replicas: 3
         raft:
           enabled: true
           setNodeId: true
@@ -56,7 +56,7 @@ spec:
               project     = "k3s-vault"
               region      = "global"
               key_ring    = "vault-unseal"
-              crypto_key  = "asmp-key"
+              crypto_key  = "civo-key"
             }
             service_registration "kubernetes" {}
     ui:

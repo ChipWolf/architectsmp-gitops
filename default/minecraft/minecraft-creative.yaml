@@ -27,7 +27,7 @@ spec:
     image: itzg/minecraft-server
     imageTag: 1.8.0-adopt13
     persistence:
-      storageClass: local-path
+      storageClass: longhorn
       dataDir:
         enabled: true
         size: 10Gi
@@ -61,7 +61,7 @@ spec:
       viewDistance: 16
       maxTickTime: -1
       memory: 8G
-      motd: '"\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7b\\u00A7lArchitect SMP\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7a\\u00A7lCreative \\u00A7r] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r\\n\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7eNews:\\u00A7r ] --\\u00A7r [ \\u00A7ddonate.architectsmp.com\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r"'
+      motd: '"\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7b\\u00A7lArchitect SMP\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7a\\u00A7lCreative \\u00A7r] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r\\n\\u00A78-\\u00A7r--\\u00A78-\\u00A7r [ \\u00A7eNews:\\u00A7r ] --\\u00A7r [ \\u00A7ddonate.hrzn.studio\\u00A7r ] \\u00A78-\\u00A7r--\\u00A78-\\u00A7r"'
       serviceType: ClusterIP
       rcon:
         enabled: true

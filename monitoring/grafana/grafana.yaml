@@ -27,7 +27,7 @@ spec:
       configmap.reloader.stakater.com/reload: "grafana"
     persistence:
       enabled: true
-      storageClassName: "openebs-hostpath"
+      storageClassName: "longhorn"
       size: 10Gi
       accessModes:
         - ReadWriteOnce
@@ -40,10 +40,10 @@ spec:
       enabled: true
       annotations:
         kubernetes.io/ingress.class: "nginx"
-      hosts: [grafana.architectsmp.com]
+      hosts: [grafana.hrzn.studio]
       tls:
         - hosts:
-            - grafana.architectsmp.com
+            - grafana.hrzn.studio
     plugins:
       - natel-discrete-panel
       - pr0ps-trackmap-panel
@@ -88,9 +88,6 @@ spec:
         prometheus-exporter-summary:
           url: https://raw.githubusercontent.com/architectsmp/k8s-gitops/master/monitoring/grafana/dashboards/prometheus_exporter_summary.json
           datasource: Prometheus
-        uptimerobot:
-          url: https://raw.githubusercontent.com/lekpamartin/uptimerobot_exporter/master/dashboards/grafana.json
-          datasource: Prometheus
         velero:
           url: https://grafana.com/api/dashboards/11055/revisions/2/download
           datasource: Prometheus
@@ -121,7 +118,7 @@ spec:
           #  url: http://loki.logs.svc.cluster.local:3100
     grafana.ini:
       server:
-        root_url: "https://grafana.architectsmp.com"
+        root_url: "https://grafana.hrzn.studio"
       paths:
         data: /var/lib/grafana/data
         logs: /var/log/grafana

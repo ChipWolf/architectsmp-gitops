@@ -24,37 +24,6 @@ spec:
       interval: 5m
   timeout: 20m
   values:
-    additionalPrometheusRulesMap:
-      uptimerobot:
-        groups:
-          - name: public
-            rules:
-              - alert: MinecraftDown
-                expr: uptimerobot_status{c1_name="Minecraft"} > 0
-                for: 15m
-                labels:
-                  severity: critical
-                annotations:
-                  summary: "Minecraft is unreachable"
-                  description: "Minecraft has been unreachable from the internet for more than 30 minutes"
-              - alert: DynmapDown
-                expr: uptimerobot_status{c1_name="Dynmap"} > 0
-                for: 30m
-                labels:
-                  severity: critical
-                annotations:
-                  summary: "Dynmap is unreachable"
-                  description: "Dynmap has been unreachable from the internet for more than 30 minutes"
-          - name: services
-            rules:
-              - alert: ServicesDown
-                expr: uptimerobot_status > 0
-                for: 5m
-                labels:
-                  severity: warning
-                annotations:
-                  summary: "{{ $labels.c1_name }} is unreachable"
-                  description: "{{ $labels.c1_name }} is unreachable from the internet for more than 5 minutes"
     server:
       resources:
         requests:
@@ -70,7 +39,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: openebs-hostpath
+              storageClassName: longhorn
               resources:
                 requests:
                   storage: 10Gi
@@ -78,12 +47,12 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.architectsmp.com/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.architectsmp.com/oauth2/start
-        hosts: [prom-alert.architectsmp.com]
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.hrzn.studio/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.hrzn.studio/oauth2/start
+        hosts: [prom-alert.hrzn.studio]
         tls:
           - hosts:
-              - prom-alert.architectsmp.com
+              - prom-alert.hrzn.studio
       config:
         global:
           resolve_timeout: 5m
@@ -93,8 +62,6 @@ spec:
             - match:
                 alertname: Watchdog
               receiver: "null"
-            - receiver: "pagerduty"
-              continue: true
             - receiver: "slack-notifications"
         inhibit_rules:
           - source_match:
@@ -104,10 +71,6 @@ spec:
             # Apply inhibition if the alertname is the same.
             equal: ["alertname", "namespace"]
         templates: ["*.tmpl"]
-      templateFiles:
-        pagerduty-custom.tmpl: |-
-          {{- define "pagerduty.custom.description" -}}[{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ if ne .CommonAnnotations.summary ""}}{{ .CommonAnnotations.summary }}{{ else if ne .CommonAnnotations.message ""}}{{ .CommonAnnotations.message }}{{ else if ne .CommonAnnotations.description ""}}{{ .CommonAnnotations.description }}{{ else }}{{ .CommonLabels.alertname }}{{ end }}{{- end -}}
-          {{- define "pagerduty.custom.instances" -}}{{- range $i, $alert := . }}{{- .Annotations.description -}}{{- "\n" -}}{{- end -}}{{- end -}}
     nodeExporter:
       serviceMonitor:
         relabelings:
@@ -133,16 +96,16 @@ spec:
         enabled: true
         annotations:
           kubernetes.io/ingress.class: "nginx"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth.architectsmp.com/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: https://auth.architectsmp.com/oauth2/start
-        hosts: [prom-server.architectsmp.com]
+          nginx.ingress.kubernetes.io/auth-url: "https://auth.hrzn.studio/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: https://auth.hrzn.studio/oauth2/start
+        hosts: [prom-server.hrzn.studio]
         tls:
           - hosts:
-              - prom-server.architectsmp.com
+              - prom-server.hrzn.studio
       prometheusSpec:
         externalLabels:
           cluster: "default"
-        replicas: 1
+        replicas: 2
         replicaExternalLabelName: "replica"
         ruleSelector: {}
         ruleNamespaceSelector: {}
@@ -159,7 +122,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: openebs-hostpath
+              storageClassName: longhorn
               resources:
                 requests:
                   storage: 10Gi

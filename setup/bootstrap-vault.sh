@@ -5,7 +5,7 @@
 # trap "kill 0" EXIT
 
 export REPO_ROOT=$(git rev-parse --show-toplevel)
-export REPLIACS="0"
+export REPLIACS="0 1 2"
 
 need() {
     if ! command -v "$1" &> /dev/null
@@ -141,6 +141,16 @@ setupVaultSecretsOperator() {
   }
 EOF
 
+  VAULT_READY=1
+  while [ $VAULT_READY != 0 ]; do
+    kubectl -n kube-system wait --for condition=Initialized pod -l app.kubernetes.io/name=vault-secrets-operator > /dev/null 2>&1
+    VAULT_READY="$?"
+    if [ $VAULT_READY != 0 ]; then 
+      echo "waiting for vault-secrets-operator pod to be somewhat ready..."
+      sleep 10; 
+    fi
+  done
+
   export VAULT_SECRETS_OPERATOR_NAMESPACE=$(kubectl -n kube-system get sa vault-secrets-operator -o jsonpath="{.metadata.namespace}")
   export VAULT_SECRET_NAME=$(kubectl -n kube-system get sa vault-secrets-operator -o jsonpath="{.secrets[*]['name']}")
   export SA_JWT_TOKEN=$(kubectl -n kube-system get secret "$VAULT_SECRET_NAME" -o jsonpath="{.data.token}" | base64 --decode; echo)
@@ -170,7 +180,6 @@ loadSecretsToVault() {
   message "writing secrets to vault"
   #vault kv put secrets/flux-system/discord-webhook address="$DISCORD_FLUX_WEBHOOK_URL"
   vault kv put secrets/cert-manager/cloudflare-api-key api-key="$CLOUDFLARE_API_KEY"
-  vault kv put secrets/kube-system/cifs username="$HETZNER_STORAGE_BOX_USERNAME" password="$HETZNER_STORAGE_BOX_PASSWORD"
   vault kv put secrets/kube-system/external-dns/cloudflare-api-key cloudflare_api_token="$CLOUDFLARE_API_KEY"
   vault kv put secrets/flux-system/discord-webhook address="$DISCORD_FLUX_WEBHOOK_URL"
 
@@ -182,7 +191,6 @@ loadSecretsToVault() {
   kvault "monitoring/kube-prometheus-stack/kube-prometheus-stack-helm-values.txt"
   kvault "monitoring/minio/minio-helm-values.txt"
   kvault "monitoring/thanos/thanos-helm-values.txt"
-  kvault "monitoring/uptimerobot/uptimerobot-helm-values.txt"
   kvault "velero/velero/velero-helm-values.txt"
 }
 

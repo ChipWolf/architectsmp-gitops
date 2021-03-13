@@ -29,7 +29,7 @@ spec:
           region: us-east-1
           s3ForcePathStyle: true
           s3Url: http://minio.monitoring.svc:9000
-          publicUrl: https://minio.architectsmp.com
+          publicUrl: https://minio.hrzn.studio
       volumeSnapshotLocation:
         name: aws
         config:
